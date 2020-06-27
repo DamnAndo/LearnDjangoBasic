@@ -1,0 +1,2 @@
+# LearnDjangoTest
+Newbie Django
