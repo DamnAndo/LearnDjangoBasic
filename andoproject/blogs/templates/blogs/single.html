@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{blog.title}}
+{% endblock %}
+
+{% block content %}
+   <p>{{blog.desc}}</p>
+   <p>{{blog.created_at}}</p>
+    <hr>
+    <h5>Komentar</h5>
+
+<form action="{% url 'blogs:comment' blog.id %}" method="POST">
+    {% csrf_token %}
+    <textarea name="desc"  cols="80" rows="8"></textarea><br>
+    <input type="submit" value="Kirim Komentar" />
+</form>
+
+
+    {% for comment in blog.comment_set.all %}
+        <p>{{comment.desc}}</p>
+    {% endfor %}
+{% endblock%}
+

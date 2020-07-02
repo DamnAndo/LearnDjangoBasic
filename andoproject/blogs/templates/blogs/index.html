@@ -5,7 +5,9 @@ Halaman Blogs
 
 {% block content %}
     {% for blog in blogs %}
-        <h3>{{blog.title}}</h3>
+        <a href="{% url 'blogs:single' id=blog.id %}">
+            <h3>{{blog.title}}</h3>
+        </a>
         <p>{{blog.desc}}</p>
     {% endfor %}
 {% endblock%}

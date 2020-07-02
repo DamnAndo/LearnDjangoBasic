@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Blogs
+from .models import Blogs,Comment
 
 # Register your models here.
-admin.site.register(Blogs)
+
+class CommentInline(admin.StackedInline):
+    model = Comment
+
+class BlogAdmin(admin.ModelAdmin):
+    inlines = [CommentInline,]
+
+admin.site.register(Blogs,BlogAdmin)
+admin.site.register(Comment)

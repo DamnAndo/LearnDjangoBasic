@@ -8,6 +8,10 @@
 </head>
 <body>
     <h3>{% block title %}{% endblock %}</h3>
+    <nav>
+        <a href="/">Home</a>
+        <a href="{% url 'blogs:index' %}">Blogs</a>
+    </nav>
     <br />
     {% block content %}{% endblock %}
 </body>
