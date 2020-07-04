@@ -5,3 +5,7 @@ body{
     margin:auto;
     padding-top:3%
 }
+
+.is-red{
+    color:red;
+}

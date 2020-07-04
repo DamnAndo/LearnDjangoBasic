@@ -5,7 +5,8 @@ from . import views
 app_name = 'blogs'
 urlpatterns = [
     path('',views.index,name='index'),
-    path('<int:id>',views.single,name='single')
+    path('<int:id>',views.single,name='single'),
+    path('comment/<int:id>',views.comment,name='comment')
 ]
 
 # handler404 = 'views.not_found'
