@@ -17,7 +17,7 @@
 
 
     {% for comment in blog.comment_set.all %}
-        <p>{{comment.desc}}</p>
+        <p>{{comment.desc}}</p> - <a href="{% url 'blogs:comment-edit' comment.id %}">Edit</a>
     {% endfor %}
 {% endblock%}
 

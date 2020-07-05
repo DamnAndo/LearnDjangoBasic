@@ -2,7 +2,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
-from .models import Blogs
+from .models import Blogs,Comment
 from . import forms
 
 
@@ -49,4 +49,23 @@ def comment(request,id):
         #
         # blog.comment_set.create(desc=newDesc)
         # return HttpResponseRedirect('/blogs/{}'.format(id))
+
+def comment_edit(request,id):
+    comment = get_object_or_404(Comment, pk=id)
+    form = forms.CommentForm(instance=comment)
+
+    if request.method == 'POST':
+        form = forms.CommentForm(instance=comment,data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Komentar Edit Success')
+            return HttpResponseRedirect(reverse('blogs:index'))
+
+
+    return render(request,'blogs/comment_edit.html',{
+        'comment':comment,
+        'form':form
+    })
+
+
 
