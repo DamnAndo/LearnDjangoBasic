@@ -37,6 +37,10 @@ def comment(request,id):
             messages.success(request, 'Berhasil Comment')
             return HttpResponseRedirect(reverse('blogs:index'))
 
+        return render(request,'blogs/single.html',{
+            'blog':blog,
+            'form':form
+        })
         # if len(newDesc) < 10:
         #     return render(request,'blogs/single.htmlxy',{
         #         'blog':blog,
