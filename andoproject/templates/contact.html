@@ -2,10 +2,21 @@
 
 {% block title %}
     Contact
+
+    {% if messages %}
+        <ul>
+            {% for message in messages%}
+            <li>
+                {{message}}
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <form action="index.html" method="POST">
+    <form action="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Kirim Email" />
     </form>
