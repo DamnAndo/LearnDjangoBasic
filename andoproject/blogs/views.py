@@ -1,6 +1,10 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
+from django.urls import reverse
+from django.contrib import messages
 from .models import Blogs
+from . import forms
+
 
 # Custom 404 Not Working
 def error_404(request, exception):
@@ -12,13 +16,14 @@ def index(request):
 
 # def single(request,id):
 #     blog = Blogs.objects.get(pk=id)
-#     return render(request,'blogs/single.html',{'blog':blog})
+#     return render(request,'blogs/single.htmlxy',{'blog':blog})
 
 
 # GIve default error handler django 404
 def single(request,id):
     blog = get_object_or_404(Blogs,pk=id)
-    return render(request,'blogs/single.html',{'blog':blog})
+    form = forms.CommentForm()
+    return render(request,'blogs/single.html',{'blog':blog,'form':form})
 
 def comment(request,id):
     blog = get_object_or_404(Blogs,pk=id)
@@ -26,12 +31,18 @@ def comment(request,id):
     if request.method == 'POST':
         newDesc = request.POST['desc']
 
-        if len(newDesc) < 10:
-            return render(request,'blogs/single.html',{
-                'blog':blog,
-                'errors':'Deskripsi kurang dari 10 karakter'
-            })
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            blog.comment_set.create(desc=newDesc)
+            messages.success(request, 'Berhasil Comment')
+            return HttpResponseRedirect(reverse('blogs:index'))
 
-        blog.comment_set.create(desc=newDesc)
-        return HttpResponseRedirect('/blogs/{}'.format(id))
+        # if len(newDesc) < 10:
+        #     return render(request,'blogs/single.htmlxy',{
+        #         'blog':blog,
+        #         'errors':'Deskripsi kurang dari 10 karakter'
+        #     })
+        #
+        # blog.comment_set.create(desc=newDesc)
+        # return HttpResponseRedirect('/blogs/{}'.format(id))
 

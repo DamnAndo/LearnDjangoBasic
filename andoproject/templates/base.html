@@ -13,6 +13,17 @@
         <a href="{% url 'blogs:index' %}">Blogs</a>
         <a href="/kontak">Contact</a>
     </nav>
+
+
+     {% if messages %}
+        <ul>
+            {% for message in messages%}
+            <li>
+                {{message}}
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <br />
     {% block content %}{% endblock %}
 </body>
