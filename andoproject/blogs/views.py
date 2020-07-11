@@ -30,10 +30,10 @@ def comment(request,id):
 
     if request.method == 'POST':
         newDesc = request.POST['desc']
-
         form = forms.CommentForm(request.POST)
+
         if form.is_valid():
-            blog.comment_set.create(desc=newDesc)
+            blog.comment_set.create(desc=newDesc,user=request.user)
             messages.success(request, 'Berhasil Comment')
             return HttpResponseRedirect(reverse('blogs:index'))
 
@@ -54,8 +54,12 @@ def comment_edit(request,id):
     comment = get_object_or_404(Comment, pk=id)
     form = forms.CommentForm(instance=comment)
 
+    if request.user.id != comment.user.id:
+        return HttpResponse("Halaman Tidak Ditemukan")
+
     if request.method == 'POST':
         form = forms.CommentForm(instance=comment,data=request.POST)
+
         if form.is_valid():
             form.save()
             messages.success(request, 'Komentar Edit Success')

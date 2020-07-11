@@ -9,15 +9,23 @@
     <hr>
     <h5>Komentar</h5>
 
-<form action="{% url 'blogs:comment' id=blog.id %}" method="POST">
-     {% csrf_token %}
-     {{ form.as_p }}
-     <input type="submit" value="Kirim Komentar" />
-</form>
+{% if user.is_authenticated %}
+    <form action="{% url 'blogs:comment' id=blog.id %}" method="POST">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <input type="submit" value="Kirim Komentar" />
+    </form>
+{% else %}
+    <p>Kamu Harus login Terlebih Dahulu</p>
+{% endif %}
 
 
     {% for comment in blog.comment_set.all %}
-        <p>{{comment.desc}}</p> - <a href="{% url 'blogs:comment-edit' comment.id %}">Edit</a>
+        <p>{{comment.desc}}</p> -
+        {% if request.user.id == comment.user.id %}
+            <a href="{% url 'blogs:comment-edit' comment.id %}">Edit</a>
+        {% endif %}
+        <p>{{comment.user}}</p>
     {% endfor %}
 {% endblock%}
 

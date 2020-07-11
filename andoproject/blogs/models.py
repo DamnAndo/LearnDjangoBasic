@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Blogs(models.Model):
     title = models.CharField(max_length=100)
@@ -14,6 +15,7 @@ class Blogs(models.Model):
 
 
 class Comment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blogs,on_delete=models.CASCADE)
     desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
