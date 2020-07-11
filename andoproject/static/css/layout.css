@@ -6,6 +6,11 @@ body{
     padding-top:3%
 }
 
-.is-red{
+.is-red, .custom-form ul .error-list{
     color:red;
+}
+
+.custom-form ul .helptext{
+    color:grey;
+    display:block;
 }

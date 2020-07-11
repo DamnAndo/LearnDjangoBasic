@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title%}
-Sign Up
+Register
 {% endblock%}
 
 {% block content%}
-<h4>Ini Sign Up</h4>
+<h4>Daftar sekarang</h4>
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Daftar" />
+</form>
 {% endblock%}
