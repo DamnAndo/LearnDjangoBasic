@@ -23,5 +23,6 @@ urlpatterns = [
     path('blogs/',include('blogs.urls',namespace='blogs')),
     path('kontak/',views.contact,name='contact'),
     path('admin/', admin.site.urls),
+    path('accounts/',include('accounts.urls',namespace='accounts'))
 ]
 
