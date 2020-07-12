@@ -5,19 +5,20 @@ from django.urls import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,update_session_auth_hash
+from .forms import SignUpForm
 
 # Create your views here.
 
 def signup(request):
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request,user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
 
     return render(request,"signup.html",{'form':form})
 
@@ -36,4 +37,3 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
     return render(request,'change_password.html',{'form':form})
-
