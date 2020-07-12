@@ -4,7 +4,7 @@ from . import views
 
 app_name = ''
 urlpatterns = [
-    path('change_password', views.change_password, name='change_password'),
+    # path('change_password', views.change_password, name='change_password'),
     path('signup',views.signup,name='signup'),
     path('activate/<uidb64>/<token>',views.activate,name='activate'),
     path('',include('django.contrib.auth.urls'))

@@ -45,21 +45,21 @@ def signup(request):
 
     return render(request,"signup.html",{'form':form})
 
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user,request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request,user)
-            messages.success(request,'Password Berhasil di ganti')
-            return redirect(reverse('login'))
-        else:
-            messages.success(request, 'Password Gagal di ganti')
-            return redirect(reverse('change_password'))
-    else:
-        form = PasswordChangeForm(request.user)
-
-    return render(request,'change_password.html',{'form':form})
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user,request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request,user)
+#             messages.success(request,'Password Berhasil di ganti')
+#             return redirect(reverse('login'))
+#         else:
+#             messages.success(request, 'Password Gagal di ganti')
+#             return redirect(reverse('change_password'))
+#     else:
+#         form = PasswordChangeForm(request.user)
+#
+#     return render(request,'password_change_form.html',{'form':form})
 
 def activate(request,uidb64,token):
     uid = force_text(urlsafe_base64_decode(uidb64).decode('utf-8'))
