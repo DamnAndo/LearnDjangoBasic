@@ -6,6 +6,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,update_session_auth_hash
 from .forms import SignUpForm
+from .tokens import account_activation_token
 
 # Create your views here.
 
@@ -15,12 +16,15 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request,user)
-            return redirect('home')
+            user.is_active = False
+            user.save()
+            token = account_activation_token.make_token(user)
+            # login(request,user)
+            # return redirect('home')
+            return render(request, "signup.html", {'form': form,'token':token})
     else:
         form = SignUpForm()
-
-    return render(request,"signup.html",{'form':form})
+        return render(request,"signup.html",{'form':form,'token':''})
 
 def change_password(request):
     if request.method == 'POST':

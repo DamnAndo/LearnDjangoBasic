@@ -6,6 +6,7 @@ Register
 
 {% block content%}
 <h4>Daftar sekarang</h4>
+<p>Token {{token}}</p>
 <form method="POST" class="custom-form">
     {% csrf_token %}
     {{ form.as_p }}
