@@ -39,7 +39,7 @@ def signup(request):
 
             # login(request,user)
             # return redirect('home')
-            return redirect(reverse('accounts:login'))
+            return redirect(reverse('login'))
     else:
         form = SignUpForm()
 
@@ -52,10 +52,10 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request,user)
             messages.success(request,'Password Berhasil di ganti')
-            return redirect(reverse('accounts:login'))
+            return redirect(reverse('login'))
         else:
             messages.success(request, 'Password Gagal di ganti')
-            return redirect(reverse('accounts:change_password'))
+            return redirect(reverse('change_password'))
     else:
         form = PasswordChangeForm(request.user)
 
@@ -74,4 +74,4 @@ def activate(request,uidb64,token):
         return redirect('home')
     else:
         messages.error(request, "Aktivasi email gagal")
-        return redirect(reverse('accounts:login'))
+        return redirect(reverse('login'))
