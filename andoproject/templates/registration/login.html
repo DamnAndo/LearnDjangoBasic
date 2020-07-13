@@ -10,5 +10,7 @@ Login
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Login" />
+    <br /><br />
+    <a href="{% url 'password_reset' %}">Lupa Password</a>
 </form>
 {% endblock%}
