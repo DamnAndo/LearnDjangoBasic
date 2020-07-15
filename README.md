@@ -1,2 +1,3 @@
-# LearnDjangoTest
-Newbie Django
+# LearnDjangoBasic
+- Basic Django
+- Auth Django
