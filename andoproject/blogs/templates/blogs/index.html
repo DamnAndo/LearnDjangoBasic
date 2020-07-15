@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Halaman Blogs
+{% endblock %}
+
+{% block content %}
+    {% for blog in blogs %}
+        <a href="{% url 'blogs:single' id=blog.id %}">
+            <h3>{{blog.title}}</h3>
+        </a>
+        <p>{{blog.desc}}</p>
+    {% endfor %}
+{% endblock%}
+

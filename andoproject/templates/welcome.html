@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Welcome Title
+{% endblock %}
+
+{% block content %}
+    <h4>Selamat datang di halaman homepage</h4>
+    <h6>Halo {{request.user.username}}</h6>
+{% endblock%}
